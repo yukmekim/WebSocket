@@ -1,0 +1,126 @@
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f2f4f7;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.chat-container {
+    width: 380px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #4A90E2;
+    color: #fff;
+}
+
+.header img {
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+}
+
+.header .username {
+    font-size: 18px;
+    font-weight: bold;
+}
+#chat {
+    padding: 15px;
+    background-color: #f9f9f9;
+    height: 400px;
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#chat .chat-wrap {
+    margin: 4px 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#chat .chat-wrap .sender {
+    margin: 10px 0 0 0;
+    padding: 0 10px;
+    font-size: 0.9em;
+}
+
+#chat p {
+    padding: 10px 15px;
+    border-radius: 20px;
+    margin: 3px 0;
+    display: inline-block;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+#chat .left {
+    background-color: #eaeaea;
+    color: #333;
+    text-align: left;
+    margin-right: auto;
+}
+
+#chat .right {
+    background-color: #4A90E2;
+    color: #fff;
+    text-align: left;
+    margin-left: auto;
+}
+
+#chat .middle {
+    margin: 12px auto;
+    color: #333;
+}
+
+.message {
+    display: flex;
+    padding: 15px;
+    background-color: #fff;
+    border-top: 1px solid #f0f0f0;
+}
+
+.message input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    outline: none;
+}
+
+.message button {
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    color: white;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.message button:disabled {
+    background-color: #a6a6a6;
+}
+
+.message button:not(:disabled) {
+    background-color: #4A90E2;
+}
+
+.message button:not(:disabled):hover {
+    background-color: #357ABD;
+}

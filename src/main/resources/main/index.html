@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+
+    <link rel="stylesheet" href="/css/chat/chat.css" />
+
+    <script src="/js/chat/chat.js"></script>
+</head>
+<body>
+<h1>Chat Room</h1>
+<input type="text" id="username" placeholder="Type a username" />
+<button onclick="closeConnection()">Close Connection</button>
+<button onclick="connect()">Join Chat</button>
+<div class="chat-container">
+    <!-- 헤더 섹션 -->
+    <div class="header">
+        <div>
+            <span class="username">오늘밤은 삐딱하게</span>
+        </div>
+    </div>
+
+    <!-- 채팅 섹션 -->
+    <div id="chat">
+    </div>
+
+    <!-- 메시지 입력 섹션 -->
+    <div class="message">
+        <input type="text" id="message" placeholder="메시지를 입력하세요...">
+        <button id="send-btn" onclick="sendMessage()" disabled>전송</button>
+    </div>
+</div>
+</body>
+
+<script>
+    const messageInput = document.getElementById('message');
+    const sendButton = document.getElementById('send-btn');
+
+    // 입력 필드에서 내용이 변경될 때마다 호출되는 함수
+    messageInput.addEventListener('input', function() {
+        // 메시지가 비어 있지 않으면 전송 버튼 활성화
+        if (messageInput.value !== "") {
+            sendButton.disabled = false;
+        } else {
+            sendButton.disabled = true;  // 입력값이 없으면 비활성화
+        }
+    });
+</script>
+</html>
