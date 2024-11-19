@@ -13,8 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.chat.dto.Chat.MessageType.JOIN;
-import static org.chat.dto.Chat.MessageType.MESSAGE;
+import static org.chat.dto.Chat.MessageType.*;
 
 public class ChatWebSocketHandler extends TextWebSocketHandler {
 
@@ -64,8 +63,13 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
             String sender = (String) session.getAttributes().get("sender");
             String roomId = (String) session.getAttributes().get("roomId");
 
-            // 채팅 메시지 처리
-            sendToAll(new Chat(sender, MESSAGE, messageData.get("content").toString(), roomId));
+            if ("MESSAGE".equals(type)) {
+                // MESSAGE 처리 로직
+                sendToAll(new Chat(sender, MESSAGE, messageData.get("content").toString(), roomId));
+            } else if ("LEAVE".equals(type)) {
+                // LEAVE 처리 로직
+                sendToAll(new Chat(sender, LEAVE, messageData.get("content").toString(), roomId));
+            }
         }
     }
 
