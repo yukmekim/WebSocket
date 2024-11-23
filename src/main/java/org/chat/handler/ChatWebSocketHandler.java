@@ -1,7 +1,7 @@
 package org.chat.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.chat.dto.ChatDTO;
+import org.chat.dto.ChatDto;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.chat.dto.ChatDTO.MessageType.*;
+import static org.chat.dto.ChatDto.MessageType.*;
 
 public class ChatWebSocketHandler extends TextWebSocketHandler {
 
@@ -55,7 +55,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
             activeSessions.computeIfAbsent(roomId, k -> new ArrayList<>()).add(session);
 
             // 채팅방에 입장한 것을 알리는 메시지 전송
-            sendToAll(new ChatDTO(sender, JOIN, sender + " 님이 입장했습니다.", roomId));
+            sendToAll(new ChatDto(sender, JOIN, sender + " 님이 입장했습니다.", roomId));
 
             roomSessions.put(roomId, sender); // 채팅방과 유저 매핑 저장
         } else {
@@ -65,10 +65,10 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
             if ("MESSAGE".equals(type)) {
                 // MESSAGE 처리 로직
-                sendToAll(new ChatDTO(sender, MESSAGE, messageData.get("content").toString(), roomId));
+                sendToAll(new ChatDto(sender, MESSAGE, messageData.get("content").toString(), roomId));
             } else if ("LEAVE".equals(type)) {
                 // LEAVE 처리 로직
-                sendToAll(new ChatDTO(sender, LEAVE, messageData.get("content").toString(), roomId));
+                sendToAll(new ChatDto(sender, LEAVE, messageData.get("content").toString(), roomId));
             }
         }
     }
@@ -85,7 +85,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
         }
     }
 
-    private void sendToAll(ChatDTO message) throws IOException {
+    private void sendToAll(ChatDto message) throws IOException {
         // 모든 세션에 메시지를 전송
         ObjectMapper objectMapper = new ObjectMapper();
         String messageJson = objectMapper.writeValueAsString(message);  // Chat 객체를 JSON 문자열로 변환
