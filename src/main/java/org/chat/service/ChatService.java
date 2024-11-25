@@ -14,7 +14,7 @@ public class ChatService {
         this.chatRepository = chatRepository;
     }
 
-    public Optional<Chat> findChatRoomById(String memberId) {
-        return chatRepository.findChatRoomById(memberId);
+    public Optional<Chat> findChatRoomByMemberId(String memberId) {
+        return chatRepository.findChatRoomByMemberId(memberId);
     }
 }
