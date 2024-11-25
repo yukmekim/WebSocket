@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface ChatRepository extends JpaRepository<Chat, String> {
     // 사용자 ID로 채팅
-    Optional<Chat> findByChatRoom(String memberId);
+    Optional<Chat> findChatRoomById(String memberId);
 }
