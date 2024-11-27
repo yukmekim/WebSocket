@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -16,8 +17,8 @@ import javax.persistence.Id;
 public class Chat {
 
     @Id
-    private String memberId;
-    private String sender;
-    private String content;
-    private String roomId;
+    private Long chatId;
+    private String chatName;
+    private String type;
+    private Date createdAt;
 }

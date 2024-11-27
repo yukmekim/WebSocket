@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.chat.dto.ChatDto;
 import org.chat.entity.Chat;
 import org.chat.service.ChatService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -18,12 +17,16 @@ import static org.chat.dto.ChatDto.MessageType.*;
 public class ChatWebSocketHandler extends TextWebSocketHandler {
 
     // 채팅방 정보 리파지토리 선언
-    @Autowired
     private ChatService chatService;
 
     // 현재 연결된 세션 관리 (간단한 메모리 기반)
     private final Map<String, List<WebSocketSession>> activeSessions = new HashMap<>();
     private Map<String, String> roomSessions = new HashMap<>(); // roomId -> sender
+
+    public ChatWebSocketHandler(ChatService chatService) {
+        this.chatService = chatService;
+    }
+
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         // WebSocket 연결이 성공적으로 열리면, 클라이언트로부터 'JOIN' 메시지가 오지 않았기 때문에,
@@ -44,14 +47,12 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
         if ("JOIN".equals(type)) {
             // JOIN 메시지 처리
-            String sender = (String) messageData.get("sender");  // 클라이언트에서 보낸 sender
+            String memberId = (String) messageData.get("memberId");  // 클라이언트에서 보낸 sender
             String roomId = (String) messageData.get("roomId");  // 클라이언트에서 보낸 roomId
 
             // 세션에 sender와 roomId를 저장
-            session.getAttributes().put("sender", sender);
+            session.getAttributes().put("memberId", memberId);
             session.getAttributes().put("roomId", roomId);
-
-            Optional<Chat> chat = chatService.findChatRoomByMemberId(sender);
 
             // 세션을 activeSessions에 추가
             //activeSessions.put(sender, session);
@@ -59,9 +60,9 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
             activeSessions.computeIfAbsent(roomId, k -> new ArrayList<>()).add(session);
 
             // 채팅방에 입장한 것을 알리는 메시지 전송
-            sendToAll(new ChatDto(sender, JOIN, sender + " 님이 입장했습니다.", roomId));
+            sendToAll(new ChatDto(memberId, JOIN, memberId + " 님이 입장했습니다.", roomId));
 
-            roomSessions.put(roomId, sender); // 채팅방과 유저 매핑 저장
+            roomSessions.put(roomId, memberId); // 채팅방과 유저 매핑 저장
         } else {
             // 다른 타입의 메시지 처리 (예: CHAT)
             String sender = (String) session.getAttributes().get("sender");
