@@ -29,7 +29,7 @@ public class ChatController {
         Optional<Chat> chat = chatService.findChatRoomByChatId(1L);
 
         model.addAttribute("chat", chat.orElse(null));
-        return "/chat/chatList";
+        return "chat/chatList";
     }
 
     // 클라이언트로부터 메시지가 들어올 때 호출됨

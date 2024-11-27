@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Chat Room</h2>
+  <!-- chat 객체가 존재하면 채팅방 정보를 보여주고, 없으면 "No chat room"을 보여줌 -->
+  <div th:if="${chat != null}">
+    <p>Chat Room Name: <span th:text="${chat.chatName}"></span></p>
+  </div>
+  <div th:if="${chat == null}">
+    <p>No chat room found.</p>
+  </div>
+</body>
+</html>
