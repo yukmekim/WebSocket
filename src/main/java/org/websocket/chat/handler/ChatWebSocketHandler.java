@@ -1,9 +1,8 @@
-package org.chat.handler;
+package org.websocket.chat.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.chat.dto.ChatDto;
-import org.chat.entity.Chat;
-import org.chat.service.ChatService;
+import org.websocket.chat.dto.ChatDto;
+import org.websocket.chat.service.ChatService;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -11,8 +10,6 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
 import java.util.*;
-
-import static org.chat.dto.ChatDto.MessageType.*;
 
 public class ChatWebSocketHandler extends TextWebSocketHandler {
 
@@ -60,7 +57,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
             activeSessions.computeIfAbsent(roomId, k -> new ArrayList<>()).add(session);
 
             // 채팅방에 입장한 것을 알리는 메시지 전송
-            sendToAll(new ChatDto(memberId, JOIN, memberId + " 님이 입장했습니다.", roomId));
+            sendToAll(new ChatDto(memberId, ChatDto.MessageType.JOIN, memberId + " 님이 입장했습니다.", roomId));
 
             roomSessions.put(roomId, memberId); // 채팅방과 유저 매핑 저장
         } else {
@@ -70,10 +67,10 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
             if ("MESSAGE".equals(type)) {
                 // MESSAGE 처리 로직
-                sendToAll(new ChatDto(sender, MESSAGE, messageData.get("content").toString(), roomId));
+                sendToAll(new ChatDto(sender, ChatDto.MessageType.MESSAGE, messageData.get("content").toString(), roomId));
             } else if ("LEAVE".equals(type)) {
                 // LEAVE 처리 로직
-                sendToAll(new ChatDto(sender, LEAVE, messageData.get("content").toString(), roomId));
+                sendToAll(new ChatDto(sender, ChatDto.MessageType.LEAVE, messageData.get("content").toString(), roomId));
             }
         }
     }

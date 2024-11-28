@@ -1,6 +1,6 @@
-package org.chat.repository;
+package org.websocket.chat.repository;
 
-import org.chat.entity.Chat;
+import org.websocket.chat.entity.Chat;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

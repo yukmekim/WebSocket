@@ -1,15 +1,14 @@
-package org.chat.controller;
+package org.websocket.chat.controller;
 
-import org.chat.dto.ChatDto;
-import org.chat.entity.Chat;
-import org.chat.service.ChatService;
+import org.websocket.chat.dto.ChatDto;
+import org.websocket.chat.entity.Chat;
+import org.websocket.chat.service.ChatService;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.testng.mustache.Model;
 
 import java.util.Optional;
 

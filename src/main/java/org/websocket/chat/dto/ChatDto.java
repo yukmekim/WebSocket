@@ -1,4 +1,4 @@
-package org.chat.dto;
+package org.websocket.chat.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

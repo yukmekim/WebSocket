@@ -1,7 +1,7 @@
-package org.chat.config;
+package org.websocket.chat.config;
 
-import org.chat.handler.ChatWebSocketHandler;
-import org.chat.service.ChatService;
+import org.websocket.chat.handler.ChatWebSocketHandler;
+import org.websocket.chat.service.ChatService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.WebSocketHandler;

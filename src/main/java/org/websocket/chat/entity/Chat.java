@@ -1,4 +1,4 @@
-package org.chat.entity;
+package org.websocket.chat.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

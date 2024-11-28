@@ -1,7 +1,7 @@
-package org.chat.service;
+package org.websocket.chat.service;
 
-import org.chat.entity.Chat;
-import org.chat.repository.ChatRepository;
+import org.websocket.chat.entity.Chat;
+import org.websocket.chat.repository.ChatRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
