@@ -8,12 +8,27 @@
 </head>
 <body>
 <h2>Chat Room</h2>
+<div>
+    <!-- 리스트가 비어 있을 때 메시지 출력 -->
+    <div th:if="${#lists.isEmpty(memberList)}">
+        목록이 없습니다.
+    </div>
+
+    <!-- 리스트가 비어 있지 않으면 목록을 반복 -->
+    <ul th:unless="${#lists.isEmpty(memberList)}">
+        <li th:each="item : ${memberList}">
+            <span th:text="${item.memberNm}"></span>
+        </li>
+    </ul>
+</div>
   <!-- chat 객체가 존재하면 채팅방 정보를 보여주고, 없으면 "No chat room"을 보여줌 -->
-  <div id="chat_list" th:if="${chat != null}">
-    <p>Chat Room Name: <span th:attr="data-chat-id=${chat.chatId}" th:text="${chat.chatName}"></span></p>
-  </div>
-  <div th:if="${chat == null}">
-    <p>No chat room found.</p>
-  </div>
+    <div>
+      <div id="chat_list" th:if="${chat != null}">
+        <p>Chat Room Name: <span th:attr="data-chat-id=${chat.chatId}" th:text="${chat.chatName}"></span></p>
+      </div>
+      <div th:if="${chat == null}">
+        <p>No chat room found.</p>
+      </div>
+    </div>
 </body>
 </html>

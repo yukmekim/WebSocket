@@ -1,5 +1,7 @@
 package org.websocket.chat.controller;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.websocket.chat.dto.ChatDto;
 import org.websocket.chat.entity.Chat;
 import org.websocket.chat.service.ChatService;
@@ -9,7 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.websocket.member.entity.Member;
+import org.websocket.member.service.MemberService;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -18,16 +23,22 @@ import java.util.Optional;
 public class ChatController {
 
     private final ChatService chatService;
+    private final MemberService memberService;
 
-    public ChatController(ChatService chatService) {
+    public ChatController(ChatService chatService, MemberService memberService) {
         this.chatService = chatService;
+        this.memberService = memberService;
     }
 
     @GetMapping("/chatList")
     public String chat(ModelMap model) {
+//        PageRequest pageRequest = PageRequest.of(1, 10);
+
         Optional<Chat> chat = chatService.findChatRoomByChatId(1L);
+        List<Member> memberList = memberService.findAll();
 
         model.addAttribute("chat", chat.orElse(null));
+        model.addAttribute("memberList", memberList);
         return "chat/chatList";
     }
 
