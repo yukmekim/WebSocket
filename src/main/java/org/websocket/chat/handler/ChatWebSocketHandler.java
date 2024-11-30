@@ -2,6 +2,7 @@ package org.websocket.chat.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.websocket.chat.dto.ChatDto;
+import org.websocket.chat.entity.Chat;
 import org.websocket.chat.service.ChatService;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -55,6 +56,11 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
             //activeSessions.put(sender, session);
             // 채팅방 세션에 사용자의 세션 추가
             activeSessions.computeIfAbsent(roomId, k -> new ArrayList<>()).add(session);
+//            Chat chat = Chat.builder()
+//                        .chatName(memberId)
+//                        .build();
+//
+//            chatService.save(chat);
 
             // 채팅방에 입장한 것을 알리는 메시지 전송
             sendToAll(new ChatDto(memberId, ChatDto.MessageType.JOIN, memberId + " 님이 입장했습니다.", roomId));

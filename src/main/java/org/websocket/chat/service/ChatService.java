@@ -17,4 +17,8 @@ public class ChatService {
     public Optional<Chat> findChatRoomByChatId(Long chatId) {
         return chatRepository.findChatRoomByChatId(chatId);
     }
+
+//    public void save(Chat chat) {
+//        chatRepository.save(chat);
+//    }
 }
