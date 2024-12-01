@@ -9,7 +9,7 @@ function connect() {
         // WebSocket에 username을 저장 (optional)
         socket.send(JSON.stringify({
             type: 'JOIN',
-            sender: document.getElementById("username").value,
+            memberId: document.getElementById("username").value,
             content: document.getElementById("username").value + ' has joined the chat',
             roomId: 'room1'
         }));

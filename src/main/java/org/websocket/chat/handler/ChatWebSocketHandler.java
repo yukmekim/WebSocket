@@ -27,8 +27,6 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        // WebSocket 연결이 성공적으로 열리면, 클라이언트로부터 'JOIN' 메시지가 오지 않았기 때문에,
-        // 먼저 이 세션에서 'sender'와 'roomId' 값을 받아온 뒤, 처리합니다.
         String message = "{\"type\": \"INFO\", \"content\": \"Connected to chat\"}";
 
         session.sendMessage(new TextMessage(message));
